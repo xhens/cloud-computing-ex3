@@ -8,36 +8,35 @@ module.exports = function (options) {
 
 
     //ToDO: add the pattern functions and describe the logic inside the function
-    function productURL(msg, response){
-        var foundProduct = '';
-        for (var i=0; i< mockData.length; i++) {
+    function productURL(msg, response) {
+        var foundProduct = false;
+        for (var i = 0; i < mockData.length; i++) {
             if (mockData[i].product_id == msg.productId) {
-                foundProduct += 1;
+                foundProduct = true;
+                response(null, {result: mockData[i].product_url})
                 break;
             }
         }
-        if(foundProduct) {
-            response(null, {result: mockData[foundProduct - 1].product_url})
-        } else {
-            response(null, {result: ''});
+
+        if (!foundProduct) {
+            response(null, {result: ''})
         }
     };
 
     function productName(msg, response) {
-        var foundProduct = '';
-        for (var i=0; i<mockData.length; i++) {
+        var foundProduct = false;
+        for (var i = 0; i < mockData.length; i++) {
             if (mockData[i].product_id == msg.productId) {
-                foundProduct += 1;
+                foundProduct = true;
+                response(null, {result: mockData[i].product_name});
                 break;
             }
         }
-        if (foundProduct) {
-            response(null, {result: mockData[foundProduct -1].product_name})
-        } else {
-            response(null, {result: ''});
+
+        if (!foundProduct) {
+            response(null, {result: ''})
         }
-    }
 
 
-
+    };
 };

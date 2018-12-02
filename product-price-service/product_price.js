@@ -7,20 +7,17 @@ module.exports = function (options) {
 
     //ToDO: add the pattern functions and describe the logic inside the function
     function productPrice(msg, response) {
-        console.log("test");
-        var foundProduct = '';
-        for (var i=0; i<mockData.length; i++) {
-            if(mockData[i].product_id == msg.productId) {
-                console.log(mockData[i]);
-                foundProduct += 1;
+        var foundProduct = false;
+        for (var i = 0; i < mockData.length; i++) {
+            if (mockData[i].product_id == msg.productId) {
+                foundProduct = true;
+                response(null, {result: mockData[i].product_price});
                 break;
             }
         }
-        if (foundProduct) {
-            response(null, {result: mockData[foundProduct - 1].product_price})
-        } else {
-            response(null, {result: ''});
-        }
-    }
 
+        if (!foundProduct) {
+            response(null, {result: ''})
+        }
+    };
 };
